@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>如何生成changelog | 曹恒虎的博客</title>
+    <meta name="description" content="曹恒虎的博客">
+    <meta name="generator" content="VuePress 1.3.1">
+    <link rel="icon" href="https://i.loli.net/2020/03/07/Ur7RLIdlsNv3zWV.png">
+    <link rel="preload" href="/blog/assets/css/0.styles.30f6b881.css" as="style"><link rel="preload" href="/blog/assets/js/app.aa0f5906.js" as="script"><link rel="preload" href="/blog/assets/js/7.300c7d95.js" as="script"><link rel="preload" href="/blog/assets/js/14.4c01bd46.js" as="script"><link rel="prefetch" href="/blog/assets/js/1.eb25af7c.js"><link rel="prefetch" href="/blog/assets/js/10.08b422bb.js"><link rel="prefetch" href="/blog/assets/js/11.69e66e60.js"><link rel="prefetch" href="/blog/assets/js/12.161f1dd2.js"><link rel="prefetch" href="/blog/assets/js/13.692a36c5.js"><link rel="prefetch" href="/blog/assets/js/15.e511cffa.js"><link rel="prefetch" href="/blog/assets/js/16.57213501.js"><link rel="prefetch" href="/blog/assets/js/17.28a8f83e.js"><link rel="prefetch" href="/blog/assets/js/3.21bbc1d1.js"><link rel="prefetch" href="/blog/assets/js/4.a3237716.js"><link rel="prefetch" href="/blog/assets/js/5.9bc2dc48.js"><link rel="prefetch" href="/blog/assets/js/6.6c72967a.js"><link rel="prefetch" href="/blog/assets/js/8.c5352b62.js"><link rel="prefetch" href="/blog/assets/js/9.829fac90.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.30f6b881.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div id="vuepress-theme-meteorlxy"><header class="header" data-v-7a046aea><div data-v-e4145d0a data-v-7a046aea><nav class="navbar" data-v-e4145d0a><div class="container" data-v-e4145d0a><a href="/blog/" class="router-link-active" data-v-e4145d0a><span class="navbar-site-name" data-v-e4145d0a>
+          曹恒虎的博客
+        </span></a> <div class="navbar-toggler" data-v-e4145d0a><svg class="icon" style="font-size:1.2em;" data-v-e4145d0a data-v-e4145d0a><title data-v-e4145d0a data-v-e4145d0a>menu</title><use xlink:href="#icon-menu" data-v-e4145d0a data-v-e4145d0a></use></svg></div> <div class="navbar-links" data-v-e4145d0a><a href="/blog/" class="navbar-link" data-v-e4145d0a>
+            首页
+          </a><a href="/blog/posts/" class="navbar-link router-link-active" data-v-e4145d0a>
+            文章
+          </a><a href="/blog/project/" class="navbar-link" data-v-e4145d0a>
+            项目
+          </a><a href="https://github.com/caohenghu" target="_blank" rel="noopener noreferrer" class="navbar-link" data-v-e4145d0a><span data-v-e4145d0a>GitHub</span> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound" data-v-e4145d0a data-v-e4145d0a><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div></div></nav> <div class="navbar-holder" style="display:none;" data-v-e4145d0a></div></div> <div class="banner" data-v-98d6aa8c data-v-7a046aea data-v-7a046aea><div class="container" data-v-98d6aa8c><div class="center" data-v-98d6aa8c><h1 data-v-98d6aa8c data-v-7a046aea>
+          如何生成changelog
+        </h1></div></div></div></header> <div class="container clearfix show-aside" data-v-4dd605a1 data-v-4dd605a1><main class="main" data-v-4dd605a1><div class="post" data-v-4dd605a1 data-v-4dd605a1><section class="post-meta main-div" data-v-4e23451f><section class="post-date clearfix" data-v-4e23451f><span class="create-date" data-v-4e23451f>
+      发布时间 : 2020-03-03
+    </span> <!----></section> <section class="post-links" data-v-4e23451f><a href="/blog/posts/2020/03/03/shell.html" class="post-link" data-v-4e23451f>
+      上一篇 : shell常用命令
+    </a> <!----></section></section> <article class="main-div"><div class="post-content content content__default"><blockquote><p>在使用 <code>git</code> 提交 <code>commit</code> 时，最好有一个规范，这样可以很方便地生成 <code>changelog</code>。</p></blockquote> <h2 id="commit-msg-规范"><a href="#commit-msg-规范" class="header-anchor">#</a> commit msg 规范</h2> <ol><li>安装依赖包</li></ol> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 强制commit msg需符合规范才能提交</span>
+$ <span class="token function">yarn</span> <span class="token function">add</span> -D @commitlint/config-conventional @commitlint/cli husky
+<span class="token comment"># 用来生成CHANGELOG.md</span>
+$ <span class="token function">yarn</span> <span class="token function">add</span> -D conventional-changelog-cli
+</code></pre></div><ol start="2"><li>在<code>package.json</code>里添加配置</li></ol> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;changelog&quot;</span><span class="token operator">:</span> <span class="token string">&quot;conventional-changelog -p angular -i CHANGELOG.md -s -r 0&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;husky&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;hooks&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;commit-msg&quot;</span><span class="token operator">:</span> <span class="token string">&quot;commitlint -E HUSKY_GIT_PARAMS&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">&quot;commitlint&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;extends&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;@commitlint/config-conventional&quot;</span><span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="3"><li>生成<code>CHANGELOG.md</code></li></ol> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 执行script里的代码</span>
+$ <span class="token function">yarn</span> changelog
+</code></pre></div><h2 id="便捷输入-commit-msg"><a href="#便捷输入-commit-msg" class="header-anchor">#</a> 便捷输入 commit msg</h2> <blockquote><p>如果对规范比较了解，可以不使用这个工具</p></blockquote> <ol><li>安装依赖包</li></ol> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token comment"># 在全局安装后可以使用 git cz 来代替 git commit，如果装在本地则需要使用 yarn git-cz</span>
+$ <span class="token function">yarn</span> global <span class="token function">add</span> commitizen
+<span class="token comment"># 安装后就有友好提示了</span>
+$ <span class="token function">yarn</span> <span class="token function">add</span> -D cz-conventional-changelog
+</code></pre></div><ol start="2"><li>在<code>package.json</code>里添加配置</li></ol> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+  <span class="token property">&quot;config&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;commitizen&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;path&quot;</span><span class="token operator">:</span> <span class="token string">&quot;cz-conventional-changelog&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="3"><li>所有的<code>commit msg</code>类型，使用的是<code>angular</code>规范</li></ol> <ul><li><strong>feat:</strong> A new feature</li> <li><strong>fix:</strong> A bug fix</li> <li><strong>docs:</strong> Documentation only changes</li> <li><strong>style:</strong> Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)</li> <li><strong>refactor:</strong> A code change that neither fixes a bug nor adds a feature</li> <li><strong>perf:</strong> A code change that improves performance</li> <li><strong>test:</strong> Adding missing tests or correcting existing tests</li> <li><strong>build:</strong> Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)</li> <li><strong>ci:</strong> Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)</li> <li><strong>chore:</strong> Other changes that don't modify src or test files</li> <li><strong>revert:</strong> Reverts a previous commit</li></ul></div></article> <section class="post-meta main-div" data-v-4e23451f><section class="post-date clearfix" data-v-4e23451f><span class="create-date" data-v-4e23451f>
+      发布时间 : 2020-03-03
+    </span> <!----></section> <section class="post-links" data-v-4e23451f><a href="/blog/posts/2020/03/03/shell.html" class="post-link" data-v-4e23451f>
+      上一篇 : shell常用命令
+    </a> <!----></section></section> <div id="post-comments" class="main-div"><!----></div></div></main> <aside class="aside" data-v-4dd605a1><div class="info-card main-div" data-v-9d847660 data-v-4dd605a1><div class="info-card-header" data-v-9d847660><img src="https://i.loli.net/2020/03/07/Ur7RLIdlsNv3zWV.png" alt="caohenghu" class="info-avatar" data-v-9d847660></div> <div class="info-card-body" data-v-9d847660><section class="info-nickname" data-v-9d847660>
+      caohenghu
+    </section> <!----> <section class="info-contact" data-v-9d847660><!----> <!----> <!----></section></div> <div class="info-card-footer" data-v-9d847660><section class="info-sns clearfix" data-v-9d847660><a href="https://github.com/caohenghu" target="_blank" class="sns-link" data-v-9d847660><span title="GitHub: caohenghu" class="sns-icon" data-v-9d847660 data-v-9d847660><svg class="icon" style="font-size:1.5em;" data-v-9d847660 data-v-9d847660><title data-v-9d847660 data-v-9d847660>GitHub: caohenghu</title><use xlink:href="#icon-github" data-v-9d847660 data-v-9d847660></use></svg></span></a></section></div></div> <div class="post-nav-card main-div" style="position:relative;top:0;width:0px;" data-v-4dd605a1><div class="post-nav-contents"><svg class="icon"><title>book</title><use xlink:href="#icon-book"></use></svg> <span>文章目录</span> <div class="post-nav-toc"><ul><li><a href="/blog/posts/2020/03/03/changelog.html#commit-msg-规范">commit msg 规范</a></li><li><a href="/blog/posts/2020/03/03/changelog.html#便捷输入-commit-msg">便捷输入 commit msg</a></li></ul></div></div> <div class="post-nav-comments"><svg class="icon"><title>comment</title><use xlink:href="#icon-comment"></use></svg> <a href="/blog/posts/2020/03/03/changelog.html#post-comments">
+      评论
+    </a></div></div></aside></div> <footer class="footer" data-v-1375e54c><p class="footer-sns-links" data-v-1375e54c><a href="https://github.com/caohenghu" target="_blank" class="sns-link" data-v-1375e54c><span title="GitHub: caohenghu" class="sns-icon" data-v-1375e54c data-v-1375e54c><svg class="icon" style="font-size:25px;" data-v-1375e54c data-v-1375e54c><title data-v-1375e54c data-v-1375e54c>GitHub: caohenghu</title><use xlink:href="#icon-github" data-v-1375e54c data-v-1375e54c></use></svg></span></a></p> <!----> <p class="footer-text" data-v-1375e54c>Copyright 2018-present <a href="https://github.com/caohenghu" target="_blank">caohenghu</a> | MIT License</p></footer></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/blog/assets/js/app.aa0f5906.js" defer></script><script src="/blog/assets/js/7.300c7d95.js" defer></script><script src="/blog/assets/js/14.4c01bd46.js" defer></script>
+  </body>
+</html>
